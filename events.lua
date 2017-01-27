@@ -2,6 +2,7 @@
 
 local pokemon = 0
 local hp = 2
+local user = "" --left blank for security reasons.
 
 local function onTextMessageEvent(serverConnectionHandlerID, targetMode, toID, fromID, fromName, fromUniqueIdentifier, message, ffIgnored, clientID, oldChannelID)
 	local channel = ts3.getChannelOfClient(serverConnectionHandlerID, fromID)
@@ -124,7 +125,7 @@ end
 					ts3.requestSendChannelTextMsg(serverConnectionHandlerID, "[b][color=red][Event][/color][/b] You failed to catch the pokemon. The pokemon fled.", channel)	
 					pokemon = 0 
 				elseif hp == 1 then
-					file = io.open("C:\\Users\\"+user+"\\Desktop\\pokemon.txt", "a+")
+					file = io.open(user, "a+")
 					file:write(fromUniqueIdentifier .. " " .. pokename[pokemon])
 					file:write("\n")
 					file:close()
@@ -138,31 +139,10 @@ end
 		end
 		
 	if string.match(message, "!read") then
-		file = io.open("C:\\Users\\"+user+"\\Desktop\\pokemon.txt", "a+")
+		file = io.open(user, "a+")
 		file:read (table.concat(fromUniqueIdentifier) )
 		file:close()
 		end
-
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	if string.match(message, "!report") then
 		print ("Running rtfw for:", message)
